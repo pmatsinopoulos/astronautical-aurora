@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const pageTitle = "Tags Index";
+
+const posts = Object.values(import.meta.glob("../posts/*.md", { eager: true }));
+console.debug("Posts", posts);
+
+const tags = [
+  ...new Set(posts.flatMap((post: any) => post.frontmatter.tags)),
+].sort();
+console.debug("tags", tags);
+---
+
+<style>
+  a {
+    color: #00539f;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: 0.5em;
+    padding: 0.5em 1em;
+    font-size: 1.15em;
+    background-color: #f8fcfd;
+  }
+</style>
+
+<BaseLayout pageTitle={pageTitle}>
+  <div class="tags">
+    {
+      tags.map((tag: any) => {
+        return (
+          <p class="tag">
+            <a href={`/tags/${tag}`}>{tag}</a>
+          </p>
+        );
+      })
+    }
+  </div>
+</BaseLayout>
