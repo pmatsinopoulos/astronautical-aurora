@@ -1,14 +1,13 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const pageTitle = "Tags Index";
 
-const posts = Object.values(import.meta.glob("../posts/*.md", { eager: true }));
+const posts = await getCollection("blog");
 console.debug("Posts", posts);
 
-const tags = [
-  ...new Set(posts.flatMap((post: any) => post.frontmatter.tags)),
-].sort();
+const tags = [...new Set(posts.flatMap((post: any) => post.data.tags))].sort();
 console.debug("tags", tags);
 ---
 

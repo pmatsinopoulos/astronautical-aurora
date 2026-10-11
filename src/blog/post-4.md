@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: Fantastic Four
 author: Panagiotis Matsinopoulos
 description: "This post will show up on its own!"
